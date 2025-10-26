@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaRoot Innovation - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #2e7d32;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b5e20;
+        }
+        #dashboard {
+            display: none;
+            margin-top: 20px;
+        }
+        .stats {
+            margin: 20px 0;
+        }
+        .stat-item {
+            margin: 10px;
+            font-size: 18px;
+        }
+        .contact {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AquaRoot Innovation</h1>
+        <div id="login">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="checkPassword()">Login</button>
+            <p id="message"></p>
+        </div>
+        <div id="dashboard">
+            <div class="stats">
+                <div class="stat-item">pH: 6.5</div>
+                <div class="stat-item">EC: 1.2 mS/cm</div>
+                <div class="stat-item">Water Level: 75%</div>
+            </div>
+            <div class="contact">
+                Contact: +91-XXX-XXX-XXXX | Email: info@aquarootinnovation.com
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "aquaroot2025"; // Password yahan change kar sakte ho
+        function checkPassword() {
+            const userPassword = document.getElementById("password").value;
+            const message = document.getElementById("message");
+            if (userPassword === correctPassword) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+                message.textContent = "";
+                // Auto-refresh stats for demo
+                setInterval(() => {
+                    document.querySelector('.stat-item:nth-child(1)').textContent = `pH: ${Math.random() * (7 - 6) + 6.0.toFixed(1)}`;
+                    document.querySelector('.stat-item:nth-child(2)').textContent = `EC: ${(Math.random() * 2).toFixed(1)} mS/cm`;
+                    document.querySelector('.stat-item:nth-child(3)').textContent = `Water Level: ${(Math.random() * 100).toFixed(0)}%`;
+                }, 2000);
+            } else {
+                message.textContent = "Wrong Password! Try Again.";
+                message.style.color = "red";
+            }
+        }
+        // Enter key pe bhi kaam kare
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
